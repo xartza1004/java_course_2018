@@ -1,15 +1,18 @@
 package com.example.demo.harrypotter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Order {
-	
-	private int bookAmount;
+
+	private final List<BookItem> bookItems = new ArrayList<>();
+
 	private double totalPrice;
 	private double discount;
 	private double netPrice;
-	private BookItem bookItem;
 
 	public int getBookAmount() {
-		return bookAmount;
+		return bookItems.size();
 	}
 
 	public double getTotalPrice() {
@@ -25,22 +28,34 @@ public class Order {
 	}
 
 	public void addItem(BookItem bookItem) {
-		this.bookItem = bookItem;
+		bookItems.add(bookItem);
 	}
 
 	public void process() {
-		if(this.bookItem != null) {
-			this.bookAmount = 1;
-			
-			//Calculate price
-			this.totalPrice = bookItem.getBook().getPrice();
-			
-			//Calculate discount
-			this.discount = 0;
-			
-			//Calculate net price
-			this.netPrice = getTotalPrice() - getDiscount();
+		if (!bookItems.isEmpty()) {
+			calculateTotalPrice();
+			calculateDiscount();
+
+			// Calculate net price
+			netPrice = getTotalPrice() - getDiscount();
 		}
 	}
-	
+
+	private void calculateDiscount() {
+		discount = 0;
+		if (getBookAmount() == 2) {
+			discount = getTotalPrice() * 0.05;
+		}
+		if (getBookAmount() == 3) {
+			discount = getTotalPrice() * 0.1;
+		}
+	}
+
+	private void calculateTotalPrice() {
+		for (BookItem bookItem : bookItems) {
+			// Don't use getBook().getPrice() by Law of Demeter
+			totalPrice += bookItem.getTotalPrice();
+		}
+	}
+
 }

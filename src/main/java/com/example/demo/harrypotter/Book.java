@@ -1,35 +1,35 @@
 package com.example.demo.harrypotter;
 
 public class Book {
-	
-	//final = immutable
-	//Static
-	//Non-static
 
-	//Variable
+	// final = immutable
+	// Static
+	// Non-static
+
+	// Variable
 	private String name;
 	private double price;
 	private int stock;
-	
-	//Constructor
+
+	// Constructor
 	public Book(String name, double price, int stock) {
 		this.name = name;
 		this.price = price;
 		this.stock = stock;
 	}
-	
-	//Getters Setters
-	
+
+	// Getters Setters
+
 	public double getPrice() {
 		return price;
 	}
-	
-	//Public method
+
+	// Public method
 
 	public static Book createHarryPotterOne() {
 		return new Book("H1", 8, 2);
 	}
-	
+
 	public static Book createHarryPotterTwo() {
 		return new Book("H2", 8, 2);
 	}
@@ -62,11 +62,11 @@ public class Book {
 			return false;
 		if (Double.doubleToLongBits(price) != Double.doubleToLongBits(other.price))
 			return false;
-		if (stock != other.stock)
-			return false;
+		// if (stock != other.stock)
+		// return false;
 		return true;
 	}
-	
-	//Private method
-	
+
+	// Private method
+
 }
