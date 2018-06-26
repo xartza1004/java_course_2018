@@ -18,4 +18,5 @@ public class BookBuilder {
 	public Book build() {
 		return new Book(this.name, this.price, 1);
 	}
+	
 }

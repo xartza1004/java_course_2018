@@ -18,6 +18,12 @@ public class Book {
 		this.stock = stock;
 	}
 	
+	//Getters Setters
+	
+	public double getPrice() {
+		return price;
+	}
+	
 	//Public method
 
 	public static Book createHarryPotterOne() {
