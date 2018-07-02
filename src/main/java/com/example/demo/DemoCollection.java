@@ -8,10 +8,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-public class Demo01 {
+public class DemoCollection {
 
 	public static void main(String[] args) {
-		Demo01 demo01 = new Demo01();
+		DemoCollection demo01 = new DemoCollection();
 		//demo01.demoList();
 		//demo01.demoMap();
 		demo01.demoSet();

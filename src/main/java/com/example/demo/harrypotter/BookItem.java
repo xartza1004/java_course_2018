@@ -18,8 +18,24 @@ public class BookItem {
 		return quantity;
 	}
 
+	public double getPrice() {
+		return book.getPrice();
+	}
+
 	public double getTotalPrice() {
-		return book.getPrice() * quantity;
+		return getPrice() * quantity;
+	}
+
+	public void addBook() {
+		quantity++;
+	}
+
+	public void addMoreBook(BookItem bookItem) {
+		quantity += bookItem.getQuantity();
+	}
+
+	public void pickBook() {
+		quantity--;
 	}
 
 	@Override

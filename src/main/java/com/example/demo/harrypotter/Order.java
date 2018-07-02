@@ -6,14 +6,11 @@ import java.util.List;
 public class Order {
 
 	private final List<BookItem> bookItems = new ArrayList<>();
+	private final DiscountCalculator discountCalculator = new DiscountCalculator(bookItems);
 
 	private double totalPrice;
 	private double discount;
 	private double netPrice;
-
-	public int getBookAmount() {
-		return bookItems.size();
-	}
 
 	public double getTotalPrice() {
 		return totalPrice;
@@ -27,31 +24,28 @@ public class Order {
 		return netPrice;
 	}
 
+	public int getBookAmount() {
+		return bookItems.size();
+	}
+
 	public void addItem(BookItem bookItem) {
-		bookItems.add(bookItem);
+		if (bookItems.contains(bookItem)) {
+			bookItems.get(bookItems.indexOf(bookItem)).addMoreBook(bookItem);
+		} else {
+			bookItems.add(bookItem);
+		}
 	}
 
 	public void process() {
 		if (!bookItems.isEmpty()) {
 			calculateTotalPrice();
-			calculateDiscount();
-
-			// Calculate net price
+			discount = discountCalculator.calculateDiscount();
 			netPrice = getTotalPrice() - getDiscount();
 		}
 	}
 
-	private void calculateDiscount() {
-		discount = 0;
-		if (getBookAmount() == 2) {
-			discount = getTotalPrice() * 0.05;
-		}
-		if (getBookAmount() == 3) {
-			discount = getTotalPrice() * 0.1;
-		}
-	}
-
 	private void calculateTotalPrice() {
+		totalPrice = 0;
 		for (BookItem bookItem : bookItems) {
 			// Don't use getBook().getPrice() by Law of Demeter
 			totalPrice += bookItem.getTotalPrice();
