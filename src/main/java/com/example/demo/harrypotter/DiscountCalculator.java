@@ -16,8 +16,8 @@ public class DiscountCalculator {
 		double discount = 0.0;
 		double bestDiscount = 0.0;
 		
-		for (int i = bookItems.size(); i > 0; i--) {
-			while (!bookItems.isEmpty()) {
+		for (int i = bookItems.size(); i > 1 ; i--) {
+			while (bookItems.size() > 1) {
 				bookSets.add(setBookSet(i));
 			}
 			discount = getNowDiscount();
@@ -83,7 +83,7 @@ public class DiscountCalculator {
 		BookItem bookItem;
 		
 		if (bookItems.size() < setAmount) {
-			bookSet = setBookSet(setAmount-1);
+			bookSet = setBookSet(bookItems.size());
 		} else {
 			bookSet = new PromotionSet();
 			for (int i = 0; i < setAmount; i++) {

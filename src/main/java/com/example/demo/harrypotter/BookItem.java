@@ -26,10 +26,6 @@ public class BookItem {
 		return getPrice() * quantity;
 	}
 
-	public void addBook() {
-		quantity++;
-	}
-
 	public void addMoreBook(BookItem bookItem) {
 		quantity += bookItem.getQuantity();
 	}
