@@ -10,13 +10,14 @@ public class MainStream {
 
 	public static void main(String[] args) {
 		MainStream p = new MainStream();
-		p.start();
+		// p.start();
+		p.startWithParallel();
 	}
 	
 	public void start() {
 		// Array
 		String[] datas = new String[] {"One", "Two", "Three"};
-		Stream<String> stream = Arrays.stream(datas);
+		Stream<String> stream = Arrays.stream(datas); // Stream.of(datas)
 		stream.forEach(System.out::println);
 		System.out.println();
 		
@@ -42,6 +43,16 @@ public class MainStream {
 				.map(string -> string.toLowerCase()) // Convert to lower case
 				.collect(Collectors.toList()); // Save output to List
 		result.forEach(System.out::println);
+	}
+	
+	public void startWithParallel() {
+		List<String> lists = new ArrayList<>();
+		lists.add("One");
+		lists.add("Two");
+		lists.add("Three");
+		lists.stream().forEach(System.out::println);
+		System.out.println();
+		lists.parallelStream().forEach(System.out::println);
 	}
 
 }
