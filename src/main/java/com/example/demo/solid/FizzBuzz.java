@@ -1,30 +1,28 @@
-package com.example.demo;
+package com.example.demo.solid;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class FizzBuzz {
 
-    public static void main(String[] args) {
-        int[] datas = {1, 2, 3, 4, 5};
-
-        // Don't
-        for(int i = 0; i < datas.length; i++) {
-            System.out.println(datas[i]);
-        }
-
-        // Do
-        int length = datas.length;
-        for(int i = 0; i < length; i++) {
-            System.out.println(datas[i]);
-        }
-
-        // Do
-        int i = 0; //optional
-        for(int data : datas) {
-            System.out.println(data);
-            i++; //optional
-        }
-    }
-
     public String say(int input) {
+    	// Register conditions
+    	List<Condition> conditions = new ArrayList<>();
+    	conditions.add(new FizzBuzzCondition());
+    	conditions.add(new FizzCondition());
+    	conditions.add(new BuzzCondition());
+    	conditions.add(new KBTGCondition());
+    	
+    	conditions.add(new DefaultCondition());
+    	
+    	// Process
+    	for (Condition condition : conditions) {
+    		if (condition.check(input)) {
+    			return condition.say(input);
+    		}
+    	}
+    	throw new RuntimeException("Condition not match");
+    	
         /*String word = Integer.toString(input);
 
         if(canDivide15(input)) {
@@ -48,11 +46,10 @@ public class FizzBuzz {
 
         return Integer.toString(input);*/
 
-        return canDivide15(input) ? "FizzBuzz"
+        /*return canDivide15(input) ? "FizzBuzz"
                 : canDivide3(input) ? "Fizz"
                 : canDivide5(input) ? "Buzz"
-                : Integer.toString(input);
-
+                : Integer.toString(input);*/
     }
 
     private boolean canDivide15(int input) {
