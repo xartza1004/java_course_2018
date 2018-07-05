@@ -1,6 +1,5 @@
 package com.example.demo;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -12,27 +11,22 @@ public class Abbreviation {
 	
 	public String oldFashionProcess(String input) {
 		String[] words = input.toUpperCase().split(" ");
-		List<String> result = new ArrayList<>();
+		String result = "";
 		
 		for (String word : words) {
 			if (!except.contains(word)) {
-				result.add(word.substring(0, 1));
+				result += word.charAt(0);
 			}
 		}
 		
-		return String.join("", result);
+		return result;
 	}
 	
 	public String streamProcess(String input) {
-		String[] words = input.toUpperCase().split(" ");
-		Stream<String> stream = Arrays.stream(words);
-		
-		List<String> result = stream
-				.filter(string -> !except.contains(string))
-				.map(string -> string.substring(0, 1))
-				.collect(Collectors.toList());
-		
-		return String.join("", result);
+		return Stream.of(input.toUpperCase().split(" "))
+				.filter(word -> !except.contains(word))
+				.map(word -> String.valueOf(word.charAt(0)))
+				.collect(Collectors.joining());
 	}
 	
 }
