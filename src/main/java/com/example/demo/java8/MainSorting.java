@@ -11,7 +11,7 @@ public class MainSorting {
 		MainSorting p = new MainSorting();
 		p.start();
 	}
-	
+
 	private void start() {
 		// Create data
 		List<Employee> employees = new ArrayList<>();
@@ -21,21 +21,24 @@ public class MainSorting {
 		employees.add(new Employee(4, "Up1", 150));
 		employees.forEach(System.out::println);
 		System.out.println();
-		
+
 		// Sorting with Comparator
-		Collections.sort(employees, new SortingBySalaryWithDescending());
+		Comparator<Employee> withLambda =
+				(Employee e1, Employee e2) ->
+				(int) (e2.getSalary() - e1.getSalary());
+		Collections.sort(employees, withLambda); // new SortingBySalaryWithDescending()
 		employees.forEach(System.out::println);
 	}
-	
+
 	class SortingBySalaryWithDescending implements Comparator<Employee> {
 
 		@Override
 		public int compare(Employee e1, Employee e2) {
 			// -1 = Desc, 0 = not change, 1 = Asce
 			// return e1.getName().compareTo(e2.getName());
-			return (int)(e2.getSalary() - e1.getSalary());
+			return (int) (e2.getSalary() - e1.getSalary());
 		}
-		
+
 	}
 
 }
